@@ -1,0 +1,6 @@
+{
+  "name": "AURA Executive AI",
+  "description": "Autonomous executive AI assistant for scheduling, communication, decks & documents, lifestyle concierge, smart car & home automation with voice, Urdu slang fluency, and end-to-end encryption.",
+  "requestFramePermissions": ["microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

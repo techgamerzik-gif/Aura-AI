@@ -1,0 +1,172 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "Executive user profile and account details",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "Firebase Auth UID of the user"
+        },
+        "email": {
+          "type": "string",
+          "description": "Executive email address"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Executive display name"
+        },
+        "photoUrl": {
+          "type": "string",
+          "description": "Avatar photo URL"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "ISO timestamp or server timestamp"
+        }
+      },
+      "required": ["userId", "email"]
+    },
+    "ExecutiveEvent": {
+      "title": "ExecutiveEvent",
+      "description": "Calendar event or board meeting schedule entry",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "Owner executive UID"
+        },
+        "title": {
+          "type": "string",
+          "description": "Event title or session name",
+          "maxLength": 300
+        },
+        "timeStart": {
+          "type": "string",
+          "description": "Start time HH:MM"
+        },
+        "timeEnd": {
+          "type": "string",
+          "description": "End time HH:MM"
+        },
+        "date": {
+          "type": "string",
+          "description": "Date YYYY-MM-DD"
+        },
+        "location": {
+          "type": "string",
+          "description": "Meeting room or virtual bridge"
+        },
+        "category": {
+          "type": "string",
+          "description": "board, client, internal, or personal"
+        },
+        "priority": {
+          "type": "string",
+          "description": "high, medium, or low"
+        },
+        "conflict": {
+          "type": "boolean",
+          "description": "Whether a transition conflict exists"
+        },
+        "conflictReason": {
+          "type": "string",
+          "description": "Reason for meeting overlap or lack of buffer"
+        },
+        "notes": {
+          "type": "string",
+          "description": "Executive notes or agenda"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Creation timestamp"
+        }
+      },
+      "required": ["userId", "title", "timeStart", "timeEnd", "date"]
+    },
+    "ExecutiveTask": {
+      "title": "ExecutiveTask",
+      "description": "Critical priority operational or strategic task",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "Owner executive UID"
+        },
+        "title": {
+          "type": "string",
+          "description": "Task description",
+          "maxLength": 300
+        },
+        "priority": {
+          "type": "string",
+          "description": "high, medium, or low"
+        },
+        "category": {
+          "type": "string",
+          "description": "board, financial, legal, or operations"
+        },
+        "completed": {
+          "type": "boolean",
+          "description": "Completion flag"
+        },
+        "dueDate": {
+          "type": "string",
+          "description": "Due date"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Creation timestamp"
+        }
+      },
+      "required": ["userId", "title"]
+    },
+    "ExecutiveDoc": {
+      "title": "ExecutiveDoc",
+      "description": "Strategic board presentation or executive briefing memo",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "Owner executive UID"
+        },
+        "title": {
+          "type": "string",
+          "description": "Document title"
+        },
+        "docType": {
+          "type": "string",
+          "description": "presentation, memo, or analysis"
+        },
+        "content": {
+          "type": "string",
+          "description": "Markdown or JSON content"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Creation timestamp"
+        }
+      },
+      "required": ["userId", "title", "docType", "content"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "Stores user profiles restricted to their owner UID"
+    },
+    "/events/{eventId}": {
+      "schema": "ExecutiveEvent",
+      "description": "Stores executive schedule items owned by authenticated user"
+    },
+    "/tasks/{taskId}": {
+      "schema": "ExecutiveTask",
+      "description": "Stores executive tasks owned by authenticated user"
+    },
+    "/docs/{docId}": {
+      "schema": "ExecutiveDoc",
+      "description": "Stores generated strategic decks and memos"
+    }
+  }
+}
